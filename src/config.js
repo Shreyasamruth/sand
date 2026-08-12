@@ -6,13 +6,13 @@ export const appConfig = {
   releaseDate: "June 26, 2018",
   
   // DIRECT CLOUDFLARE HIGH-SPEED LOCAL TUNNEL
-  downloadUrl: "https://broadway-because-local-webcams.trycloudflare.com/HDP_2.6.5_virtualbox_180626.ova",
+  downloadUrl: "https://disciplines-buying-stationery-beautiful.trycloudflare.com/HDP_2.6.5_virtualbox_180626.ova",
   
   // Alternate mirror links
   mirrors: [
     {
       name: "Cloudflare Direct Tunnel Stream",
-      url: "https://broadway-because-local-webcams.trycloudflare.com/HDP_2.6.5_virtualbox_180626.ova",
+      url: "https://disciplines-buying-stationery-beautiful.trycloudflare.com/HDP_2.6.5_virtualbox_180626.ova",
       speed: "Direct Local File Stream (15.01 GB)"
     },
     {
