@@ -5,14 +5,14 @@ export const appConfig = {
   format: "VirtualBox Open Virtual Appliance (.ova)",
   releaseDate: "June 26, 2018",
   
-  // DIRECT CLOUDFLARE HIGH-SPEED LOCAL TUNNEL
-  downloadUrl: "https://disciplines-buying-stationery-beautiful.trycloudflare.com/HDP_2.6.5_virtualbox_180626.ova",
+  // DIRECT HIGH-SPEED LOCAL STREAM TUNNEL
+  downloadUrl: "https://38fff5b2c5bec9.lhr.life/HDP_2.6.5_virtualbox_180626.ova",
   
   // Alternate mirror links
   mirrors: [
     {
-      name: "Cloudflare Direct Tunnel Stream",
-      url: "https://disciplines-buying-stationery-beautiful.trycloudflare.com/HDP_2.6.5_virtualbox_180626.ova",
+      name: "Direct High-Speed Tunnel Stream",
+      url: "https://38fff5b2c5bec9.lhr.life/HDP_2.6.5_virtualbox_180626.ova",
       speed: "Direct Local File Stream (15.01 GB)"
     },
     {
