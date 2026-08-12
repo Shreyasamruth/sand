@@ -5,25 +5,20 @@ export const appConfig = {
   format: "VirtualBox Open Virtual Appliance (.ova)",
   releaseDate: "June 26, 2018",
   
-  // REPLACE THIS WITH YOUR DIRECT CLOUD STORAGE URL (Google Drive, Cloudflare R2, AWS S3, Mega, etc.)
-  downloadUrl: "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID",
+  // PRIMARY GOOGLE DRIVE STORAGE LINK
+  downloadUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
   
-  // Alternate mirror links if available
+  // Alternate mirror links
   mirrors: [
     {
-      name: "Google Drive Mirror",
-      url: "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID",
-      speed: "Fast (15GB Limit)"
+      name: "Google Drive Storage Folder",
+      url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
+      speed: "Fast (Google Cloud Infrastructure)"
     },
     {
-      name: "Cloudflare R2 / S3 Storage",
-      url: "https://your-bucket.r2.cloudflarestorage.com/HDP_2.6.5_virtualbox_180626.ova",
-      speed: "High Speed Egress"
-    },
-    {
-      name: "Internet Archive Mirror",
-      url: "https://archive.org/details/HDP_2.6.5_virtualbox",
-      speed: "Unlimited Public Storage"
+      name: "Google Drive Direct Mirror",
+      url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
+      speed: "High Speed Access"
     }
   ],
 
