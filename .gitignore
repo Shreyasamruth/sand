@@ -3,6 +3,7 @@
 *.iso
 *.vmdk
 *.qcow2
+*.exe
 
 # Dependencies
 node_modules/
