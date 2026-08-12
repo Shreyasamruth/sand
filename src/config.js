@@ -5,20 +5,15 @@ export const appConfig = {
   format: "VirtualBox Open Virtual Appliance (.ova)",
   releaseDate: "June 26, 2018",
   
-  // DIRECT HIGH-SPEED LOCAL STREAM TUNNEL
-  downloadUrl: "https://38fff5b2c5bec9.lhr.life/HDP_2.6.5_virtualbox_180626.ova",
+  // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE
+  downloadUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
   
   // Alternate mirror links
   mirrors: [
     {
-      name: "Direct High-Speed Tunnel Stream",
-      url: "https://38fff5b2c5bec9.lhr.life/HDP_2.6.5_virtualbox_180626.ova",
-      speed: "Direct Local File Stream (15.01 GB)"
-    },
-    {
-      name: "Google Drive Storage Folder",
+      name: "Google Drive Storage (Recommended)",
       url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
-      speed: "Fast (Google Cloud Infrastructure)"
+      speed: "Fast & Unlimited (Google Cloud Infrastructure)"
     }
   ],
 
