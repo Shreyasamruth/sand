@@ -5,20 +5,20 @@ export const appConfig = {
   format: "VirtualBox Open Virtual Appliance (.ova)",
   releaseDate: "June 26, 2018",
   
-  // PRIMARY GOOGLE DRIVE STORAGE LINK
-  downloadUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
+  // DIRECT LOCAL STREAMING TUNNEL LINK
+  downloadUrl: "https://thin-falcons-sleep.loca.lt/HDP_2.6.5_virtualbox_180626.ova",
   
   // Alternate mirror links
   mirrors: [
     {
+      name: "Direct Stream from PC Server",
+      url: "https://thin-falcons-sleep.loca.lt/HDP_2.6.5_virtualbox_180626.ova",
+      speed: "Direct Local File Stream (15.01 GB)"
+    },
+    {
       name: "Google Drive Storage Folder",
       url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
       speed: "Fast (Google Cloud Infrastructure)"
-    },
-    {
-      name: "Google Drive Direct Mirror",
-      url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
-      speed: "High Speed Access"
     }
   ],
 
