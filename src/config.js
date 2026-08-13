@@ -6,7 +6,7 @@ export const appConfig = {
   releaseDate: "June 26, 2018",
   
   // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE (RELIABLE)
-  downloadUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
+  downloadUrl: "https://resistant-decent-mistress-lanes.trycloudflare.com",
   
   // Alternate mirror links
   mirrors: [

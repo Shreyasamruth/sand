@@ -15,7 +15,7 @@ const stat = fs.statSync(FILE_PATH);
 const totalSize = stat.size;
 
 const server = http.createServer((req, res) => {
-  // CORS Headers
+  // CORS Headers for browser downloads
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Range');
@@ -27,43 +27,87 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Serve Direct File Download
+  // Ignore favicon requests
+  if (req.url === '/favicon.ico') {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
+  // Common Headers for Download
+  const headers = {
+    'Content-Type': 'application/octet-stream',
+    'Content-Disposition': `attachment; filename="${FILE_NAME}"`,
+    'Accept-Ranges': 'bytes',
+    'Cache-Control': 'no-cache'
+  };
+
+  // Handle HEAD requests (Browsers/Download Managers check file specs first)
+  if (req.method === 'HEAD') {
+    res.writeHead(200, {
+      ...headers,
+      'Content-Length': totalSize
+    });
+    res.end();
+    return;
+  }
+
+  // Handle HTTP Range Requests for Resumable Downloads
   const range = req.headers.range;
 
   if (range) {
-    // Handle HTTP Range Requests for Resumable Downloads
     const parts = range.replace(/bytes=/, "").split("-");
     const start = parseInt(parts[0], 10);
     const end = parts[1] ? parseInt(parts[1], 10) : totalSize - 1;
-    const chunksize = (end - start) + 1;
 
-    const fileStream = fs.createReadStream(FILE_PATH, { start, end });
+    if (isNaN(start) || start >= totalSize || end >= totalSize || start > end) {
+      res.writeHead(416, {
+        'Content-Range': `bytes */${totalSize}`
+      });
+      res.end();
+      return;
+    }
+
+    const chunksize = (end - start) + 1;
+    const fileStream = fs.createReadStream(FILE_PATH, { 
+      start, 
+      end, 
+      highWaterMark: 1024 * 1024 // 1MB buffer chunks for fast transfer
+    });
 
     res.writeHead(206, {
+      ...headers,
       'Content-Range': `bytes ${start}-${end}/${totalSize}`,
-      'Accept-Ranges': 'bytes',
-      'Content-Length': chunksize,
-      'Content-Type': 'application/octet-stream',
-      'Content-Disposition': `attachment; filename="${FILE_NAME}"`
+      'Content-Length': chunksize
     });
 
     fileStream.pipe(res);
+
+    req.on('close', () => {
+      fileStream.destroy();
+    });
   } else {
     // Full File Stream
-    res.writeHead(200, {
-      'Content-Length': totalSize,
-      'Content-Type': 'application/octet-stream',
-      'Content-Disposition': `attachment; filename="${FILE_NAME}"`,
-      'Accept-Ranges': 'bytes'
+    const fileStream = fs.createReadStream(FILE_PATH, { 
+      highWaterMark: 1024 * 1024 // 1MB buffer chunks
     });
 
-    fs.createReadStream(FILE_PATH).pipe(res);
+    res.writeHead(200, {
+      ...headers,
+      'Content-Length': totalSize
+    });
+
+    fileStream.pipe(res);
+
+    req.on('close', () => {
+      fileStream.destroy();
+    });
   }
 });
 
 server.listen(PORT, () => {
   console.log(`\n==================================================`);
-  console.log(`🚀 DIRECT FILE SERVER RUNNING FOR YOUR 15 GB OVA`);
+  console.log(`🚀 HIGH-SPEED DIRECT FILE SERVER RUNNING (15 GB OVA)`);
   console.log(`==================================================`);
   console.log(`Local URL:  http://localhost:${PORT}/download`);
   console.log(`File Name:  ${FILE_NAME}`);
