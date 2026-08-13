@@ -6,7 +6,7 @@ export const appConfig = {
   releaseDate: "June 26, 2018",
   
   // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE (RELIABLE)
-  downloadUrl: "https://cold-dns-scholarships-memories.trycloudflare.com",
+  downloadUrl: "https://membership-mazda-electronic-trademarks.trycloudflare.com",
   
   // Alternate mirror links
   mirrors: [
