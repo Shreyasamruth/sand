@@ -6,14 +6,19 @@ export const appConfig = {
   releaseDate: "June 26, 2018",
   
   // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE
-  downloadUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
+  downloadUrl: "https://bright-zebras-exist.loca.lt",
   
   // Alternate mirror links
   mirrors: [
     {
-      name: "Google Drive Storage (Recommended)",
+      name: "Direct Cloud Channel (Live Local Host)",
+      url: "https://bright-zebras-exist.loca.lt",
+      speed: "Direct High-Speed Stream from Host Machine"
+    },
+    {
+      name: "Google Drive Storage (Cloud Backup)",
       url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
-      speed: "Fast & Unlimited (Google Cloud Infrastructure)"
+      speed: "Cloud Storage Mirror"
     }
   ],
 

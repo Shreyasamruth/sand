@@ -19,3 +19,9 @@ build/
 .env.local
 .DS_Store
 Thumbs.db
+
+# Temporary logs & tunnel state
+*.log
+*.txt
+live-url.txt
+vite.config.js.timestamp*

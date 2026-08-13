@@ -8,12 +8,14 @@
     "build": "vite build",
     "preview": "vite preview",
     "serve-file": "node serve-file.js",
-    "share": "npx localtunnel --port 8080"
+    "share": "npx localtunnel --port 8080",
+    "start-live": "node start-live-tunnel.js"
   },
   "devDependencies": {
     "vite": "^5.1.0"
   },
   "dependencies": {
+    "localtunnel": "^2.0.2",
     "lucide": "^0.344.0"
   }
 }
