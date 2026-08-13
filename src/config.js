@@ -6,13 +6,13 @@ export const appConfig = {
   releaseDate: "June 26, 2018",
   
   // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE
-  downloadUrl: "https://bright-zebras-exist.loca.lt?bypass-tunnel-reminder=true",
+  downloadUrl: "https://light-rockets-shake.loca.lt?bypass-tunnel-reminder=true",
   
   // Alternate mirror links
   mirrors: [
     {
       name: "Direct Cloud Channel (Live Local Host)",
-      url: "https://bright-zebras-exist.loca.lt?bypass-tunnel-reminder=true",
+      url: "https://light-rockets-shake.loca.lt?bypass-tunnel-reminder=true",
       speed: "Direct High-Speed Stream from Host Machine"
     },
     {
