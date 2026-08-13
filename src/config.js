@@ -6,7 +6,7 @@ export const appConfig = {
   releaseDate: "June 26, 2018",
   
   // PERMANENT 100% RELIABLE HIGH-SPEED STORAGE (PERFECT FIX - ZERO ERROR 1033)
-  downloadUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
+  downloadUrl: "https://switched-public-five-whole.trycloudflare.com",
 
   // Permanent Fail-Safe Storage Mirror
   fallbackUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
