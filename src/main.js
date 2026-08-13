@@ -18,11 +18,13 @@ function initPortal() {
   // Render Mirrors
   renderMirrors();
 
-  // Primary Download Button Setup
+  // Primary Download Button Setup - Direct Native Link
   const primaryBtn = document.getElementById('primary-download-btn');
   if (primaryBtn) {
+    primaryBtn.href = appConfig.downloadUrl;
+    primaryBtn.setAttribute('download', appConfig.fileName);
     primaryBtn.addEventListener('click', () => {
-      triggerDownload(appConfig.downloadUrl, appConfig.fileName);
+      showToast('🚀 Direct file stream download starting...');
     });
   }
 
@@ -55,79 +57,12 @@ function renderMirrors() {
           <div class="mirror-meta">${mirror.speed}</div>
         </div>
       </div>
-      <button class="btn btn-outline mirror-download-btn" data-url="${mirror.url}">
+      <a href="${mirror.url}" target="_blank" rel="noopener noreferrer" download="${appConfig.fileName}" class="btn btn-outline mirror-download-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Download Mirror ${idx + 1}
-      </button>
+      </a>
     </div>
   `).join('');
-
-  document.querySelectorAll('.mirror-download-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const url = e.currentTarget.getAttribute('data-url');
-      triggerDownload(url, appConfig.fileName);
-    });
-  });
-}
-
-// Smart connection pre-flight check to prevent Cloudflare Error 1033 pages
-async function triggerDownload(url, filename) {
-  if (!url || url.includes('YOUR_FILE_ID') || url.includes('your-bucket')) {
-    showToast('⚠️ Please update the download link in src/config.js with your cloud storage URL!');
-    return;
-  }
-  
-  let targetUrl = url;
-
-  // If the target is a Cloudflare Tunnel or local tunnel URL, perform a 2-second pre-flight health test
-  if (targetUrl.includes('trycloudflare.com') || targetUrl.includes('loca.lt')) {
-    showToast('🔍 Verifying live host stream...');
-    const isAlive = await testConnection(targetUrl);
-    
-    if (!isAlive) {
-      console.warn('⚠️ Tunnel stream un-reachable (Error 1033 protection). Seamlessly routing to Google Drive Storage...');
-      showToast('⚡ Live tunnel re-connecting. Routing to High-Speed Google Drive Mirror...');
-      targetUrl = appConfig.fallbackUrl || "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link";
-    } else {
-      showToast('🚀 Live stream verified! Starting download...');
-    }
-  } else {
-    showToast('🚀 High-speed download starting...');
-  }
-
-  if (targetUrl.includes('loca.lt') && !targetUrl.includes('bypass-tunnel-reminder')) {
-    targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'bypass-tunnel-reminder=true';
-  }
-
-  const a = document.createElement('a');
-  a.href = targetUrl;
-  a.target = '_blank';
-  a.rel = 'noopener noreferrer';
-  a.download = filename || 'HDP_2.6.5_virtualbox_180626.ova';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
-
-// 2.5 second timeout connection test to completely eliminate Error 1033 pages for users
-function testConnection(url) {
-  return new Promise((resolve) => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => {
-      controller.abort();
-      resolve(false);
-    }, 2500);
-
-    fetch(url, { method: 'HEAD', mode: 'no-cors', signal: controller.signal })
-      .then(() => {
-        clearTimeout(timeoutId);
-        resolve(true);
-      })
-      .catch(() => {
-        clearTimeout(timeoutId);
-        resolve(false);
-      });
-  });
 }
 
 function setupCopyButtons() {
