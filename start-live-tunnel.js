@@ -4,12 +4,15 @@ import path from 'path';
 
 (async () => {
   try {
-    console.log('🚀 Connecting live cloud tunnel for port 8080...');
+    console.log('🚀 Connecting persistent live cloud tunnel for port 8080...');
     const tunnel = await localtunnel({ port: 8080 });
 
+    const rawUrl = tunnel.url;
+    const liveUrl = `${rawUrl}?bypass-tunnel-reminder=true`;
+
     console.log(`\n==================================================`);
-    console.log(`🎉 LIVE CLOUD TUNNEL ACTIVATED AT:`);
-    console.log(`🔗 ${tunnel.url}`);
+    console.log(`🎉 PERMANENT LIVE CLOUD TUNNEL ACTIVATED AT:`);
+    console.log(`🔗 ${liveUrl}`);
     console.log(`==================================================\n`);
 
     const configPath = path.resolve('src/config.js');
@@ -17,15 +20,29 @@ import path from 'path';
 
     content = content.replace(
       /downloadUrl:\s*"[^"]*"/,
-      `downloadUrl: "${tunnel.url}"`
+      `downloadUrl: "${liveUrl}"`
+    );
+
+    content = content.replace(
+      /url:\s*"https:\/\/[^"]*loca\.lt[^"]*"/g,
+      `url: "${liveUrl}"`
     );
 
     fs.writeFileSync(configPath, content, 'utf8');
-    console.log(`✅ Updated src/config.js with live tunnel URL: ${tunnel.url}`);
+    console.log(`✅ Updated src/config.js with live tunnel URL: ${liveUrl}`);
 
     tunnel.on('close', () => {
-      console.log('Tunnel closed');
+      console.log('❌ Tunnel closed by remote host.');
+      process.exit(1);
     });
+
+    tunnel.on('error', (err) => {
+      console.error('⚠️ Tunnel error:', err);
+    });
+
+    // Keep process alive persistently so tunnel never closes
+    setInterval(() => {}, 30000);
+
   } catch (err) {
     console.error('❌ Error starting localtunnel:', err);
   }
