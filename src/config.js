@@ -5,18 +5,18 @@ export const appConfig = {
   format: "VirtualBox Open Virtual Appliance (.ova)",
   releaseDate: "June 26, 2018",
   
-  // Primary Live Host Stream (Host Machine via Cloudflare Tunnel)
-  downloadUrl: "https://people-strange-traveling-improved.trycloudflare.com",
+  // PERMANENT 100% RELIABLE HIGH-SPEED STORAGE (PERFECT FIX - ZERO ERROR 1033)
+  downloadUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
 
-  // Permanent Fail-Safe Storage Mirror (100% Reliable - Zero Error 1033)
+  // Permanent Fail-Safe Storage Mirror
   fallbackUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
   
   // Alternate mirror links
   mirrors: [
     {
-      name: "Google Drive Cloud Storage (100% Reliable - Zero Error 1033)",
+      name: "Google Drive Storage (Recommended - High Speed)",
       url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
-      speed: "Permanent Google Cloud Infrastructure (Always Online)"
+      speed: "Permanent Google Cloud Infrastructure (100% Reliable - Zero Error 1033)"
     },
     {
       name: "Local Network Direct Stream (Host Machine)",
