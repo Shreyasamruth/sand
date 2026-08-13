@@ -6,7 +6,7 @@ export const appConfig = {
   releaseDate: "June 26, 2018",
   
   // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE (RELIABLE)
-  downloadUrl: "https://obligations-sleeve-taken-accounts.trycloudflare.com",
+  downloadUrl: "https://attending-lists-deputy-disciplinary.trycloudflare.com",
   
   // Alternate mirror links
   mirrors: [
