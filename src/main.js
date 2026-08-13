@@ -77,11 +77,20 @@ function triggerDownload(url, filename) {
   }
   
   showToast('🚀 Download starting...');
+
+  let downloadTarget = url;
+  if (downloadTarget.includes('loca.lt') && !downloadTarget.includes('bypass-tunnel-reminder')) {
+    downloadTarget += (downloadTarget.includes('?') ? '&' : '?') + 'bypass-tunnel-reminder=true';
+  }
+
   const a = document.createElement('a');
-  a.href = url;
+  a.href = downloadTarget;
   a.target = '_blank';
   a.rel = 'noopener noreferrer';
+  a.download = filename || 'HDP_2.6.5_virtualbox_180626.ova';
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
 }
 
 function setupCopyButtons() {
