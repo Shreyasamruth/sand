@@ -15,7 +15,7 @@ const stat = fs.statSync(FILE_PATH);
 const totalSize = stat.size;
 
 const server = http.createServer((req, res) => {
-  // CORS Headers for browser downloads
+  // CORS Headers for high-concurrency browser downloads
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Range');
@@ -39,7 +39,8 @@ const server = http.createServer((req, res) => {
     'Content-Type': 'application/octet-stream',
     'Content-Disposition': `attachment; filename="${FILE_NAME}"`,
     'Accept-Ranges': 'bytes',
-    'Cache-Control': 'no-cache'
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive'
   };
 
   // Handle HEAD requests (Browsers/Download Managers check file specs first)
@@ -105,12 +106,20 @@ const server = http.createServer((req, res) => {
   }
 });
 
+// Configure Server for 5000 Concurrent Connections & Extended Timeouts
+server.maxConnections = 5000;
+server.keepAliveTimeout = 300000; // 5 minutes keep-alive
+server.headersTimeout = 305000;    // 305 seconds header timeout
+server.requestTimeout = 0;         // Unlimited request timeout for 15GB streams
+
 server.listen(PORT, () => {
   console.log(`\n==================================================`);
-  console.log(`🚀 HIGH-SPEED DIRECT FILE SERVER RUNNING (15 GB OVA)`);
+  console.log(`🚀 HIGH-CONCURRENCY FILE SERVER RUNNING (5000 MAX CONNS)`);
   console.log(`==================================================`);
-  console.log(`Local URL:  http://localhost:${PORT}/download`);
-  console.log(`File Name:  ${FILE_NAME}`);
-  console.log(`File Size:  ${(totalSize / (1024 * 1024 * 1024)).toFixed(2)} GB`);
+  console.log(`Local URL:        http://localhost:${PORT}/download`);
+  console.log(`File Name:        ${FILE_NAME}`);
+  console.log(`File Size:        ${(totalSize / (1024 * 1024 * 1024)).toFixed(2)} GB`);
+  console.log(`Max Connections:  5000 concurrent sockets`);
+  console.log(`KeepAlive Timeout: 300,000 ms (5 mins)`);
   console.log(`==================================================\n`);
 });

@@ -2,11 +2,12 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
-console.log('🚀 Launching Cloudflare Tunnel for Port 8080...');
+console.log('🚀 Launching Cloudflare Tunnel (HTTP/2 Stable TCP Protocol) for Port 8080...');
 
 const cloudflaredExe = path.resolve('cloudflared.exe');
 
-const cf = spawn(cloudflaredExe, ['tunnel', '--url', 'http://127.0.0.1:8080', '--no-autoupdate'], {
+// Use HTTP/2 TCP protocol to avoid UDP QUIC packet drops on Windows
+const cf = spawn(cloudflaredExe, ['tunnel', '--url', 'http://127.0.0.1:8080', '--protocol', 'http2', '--no-autoupdate'], {
   cwd: process.cwd()
 });
 
@@ -19,7 +20,7 @@ function processOutput(data) {
     const liveUrl = matches.find(u => !u.includes('api.trycloudflare.com'));
     if (liveUrl) {
       console.log(`\n==================================================`);
-      console.log(`🎉 CLOUDFLARE LIVE TUNNEL ACTIVATED AT:`);
+      console.log(`🎉 CLOUDFLARE STABLE HTTP/2 TUNNEL ACTIVATED AT:`);
       console.log(`🔗 ${liveUrl}`);
       console.log(`==================================================\n`);
 

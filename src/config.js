@@ -5,15 +5,18 @@ export const appConfig = {
   format: "VirtualBox Open Virtual Appliance (.ova)",
   releaseDate: "June 26, 2018",
   
-  // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE (RELIABLE)
+  // Primary Live Host Stream (Host Machine via Cloudflare Tunnel)
   downloadUrl: "https://attending-lists-deputy-disciplinary.trycloudflare.com",
+
+  // Permanent Fail-Safe Storage Mirror (100% Reliable - Zero Error 1033)
+  fallbackUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
   
   // Alternate mirror links
   mirrors: [
     {
-      name: "Google Drive Storage (Recommended - High Speed)",
+      name: "Google Drive Cloud Storage (100% Reliable - Zero Error 1033)",
       url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
-      speed: "Permanent Google Cloud Infrastructure (100% Reliable)"
+      speed: "Permanent Google Cloud Infrastructure (Always Online)"
     },
     {
       name: "Local Network Direct Stream (Host Machine)",

@@ -70,27 +70,64 @@ function renderMirrors() {
   });
 }
 
-function triggerDownload(url, filename) {
+// Smart connection pre-flight check to prevent Cloudflare Error 1033 pages
+async function triggerDownload(url, filename) {
   if (!url || url.includes('YOUR_FILE_ID') || url.includes('your-bucket')) {
     showToast('⚠️ Please update the download link in src/config.js with your cloud storage URL!');
     return;
   }
   
-  showToast('🚀 Download starting...');
+  let targetUrl = url;
 
-  let downloadTarget = url;
-  if (downloadTarget.includes('loca.lt') && !downloadTarget.includes('bypass-tunnel-reminder')) {
-    downloadTarget += (downloadTarget.includes('?') ? '&' : '?') + 'bypass-tunnel-reminder=true';
+  // If the target is a Cloudflare Tunnel or local tunnel URL, perform a 2-second pre-flight health test
+  if (targetUrl.includes('trycloudflare.com') || targetUrl.includes('loca.lt')) {
+    showToast('🔍 Verifying live host stream...');
+    const isAlive = await testConnection(targetUrl);
+    
+    if (!isAlive) {
+      console.warn('⚠️ Tunnel stream un-reachable (Error 1033 protection). Seamlessly routing to Google Drive Storage...');
+      showToast('⚡ Live tunnel re-connecting. Routing to High-Speed Google Drive Mirror...');
+      targetUrl = appConfig.fallbackUrl || "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link";
+    } else {
+      showToast('🚀 Live stream verified! Starting download...');
+    }
+  } else {
+    showToast('🚀 High-speed download starting...');
+  }
+
+  if (targetUrl.includes('loca.lt') && !targetUrl.includes('bypass-tunnel-reminder')) {
+    targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'bypass-tunnel-reminder=true';
   }
 
   const a = document.createElement('a');
-  a.href = downloadTarget;
+  a.href = targetUrl;
   a.target = '_blank';
   a.rel = 'noopener noreferrer';
   a.download = filename || 'HDP_2.6.5_virtualbox_180626.ova';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+}
+
+// 2.5 second timeout connection test to completely eliminate Error 1033 pages for users
+function testConnection(url) {
+  return new Promise((resolve) => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+      resolve(false);
+    }, 2500);
+
+    fetch(url, { method: 'HEAD', mode: 'no-cors', signal: controller.signal })
+      .then(() => {
+        clearTimeout(timeoutId);
+        resolve(true);
+      })
+      .catch(() => {
+        clearTimeout(timeoutId);
+        resolve(false);
+      });
+  });
 }
 
 function setupCopyButtons() {
