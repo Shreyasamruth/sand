@@ -5,20 +5,20 @@ export const appConfig = {
   format: "VirtualBox Open Virtual Appliance (.ova)",
   releaseDate: "June 26, 2018",
   
-  // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE
-  downloadUrl: "https://villages-discussed-playback-contracts.trycloudflare.com",
+  // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE (RELIABLE)
+  downloadUrl: "https://thousand-depending-edges-signature.trycloudflare.com",
   
   // Alternate mirror links
   mirrors: [
     {
-      name: "Direct Cloud Channel (Live Local Host)",
-      url: "https://villages-discussed-playback-contracts.trycloudflare.com",
-      speed: "Direct High-Speed Stream from Host Machine"
+      name: "Google Drive Storage (Recommended - High Speed)",
+      url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
+      speed: "Permanent Google Cloud Infrastructure (100% Reliable)"
     },
     {
-      name: "Google Drive Storage (Cloud Backup)",
-      url: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
-      speed: "Cloud Storage Mirror"
+      name: "Local Network Direct Stream (Host Machine)",
+      url: "http://10.101.158.77:8080/download",
+      speed: "Direct Local LAN Transfer (Port 8080)"
     }
   ],
 
