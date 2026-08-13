@@ -6,7 +6,7 @@ export const appConfig = {
   releaseDate: "June 26, 2018",
   
   // Primary Live Host Stream (Host Machine via Cloudflare Tunnel)
-  downloadUrl: "https://unix-standings-cohen-demonstration.trycloudflare.com",
+  downloadUrl: "https://country-contained-meaning-southwest.trycloudflare.com",
 
   // Permanent Fail-Safe Storage Mirror (100% Reliable - Zero Error 1033)
   fallbackUrl: "https://drive.google.com/drive/folders/1y0xDrtToGEW8_gs0u1UeLxMWIc69diA7?usp=drive_link",
