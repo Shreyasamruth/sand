@@ -6,7 +6,7 @@ export const appConfig = {
   releaseDate: "June 26, 2018",
   
   // PERMANENT HIGH-SPEED GOOGLE DRIVE STORAGE (RELIABLE)
-  downloadUrl: "https://smtp-platinum-msgid-seal.trycloudflare.com",
+  downloadUrl: "https://cold-dns-scholarships-memories.trycloudflare.com",
   
   // Alternate mirror links
   mirrors: [
